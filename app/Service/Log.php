@@ -20,7 +20,7 @@ class Log
 
     private function setUp(): Logger {
         $log = new Logger($this->name);
-        $log->pushHandler(new StreamHandler(__DIR__.'/../../logs/'.$this->logFileName, Level::Info));
+        $log->pushHandler(new StreamHandler(__DIR__.'/../../logs/'.$this->logFileName, $this->level));
         return $log;
     }
 
