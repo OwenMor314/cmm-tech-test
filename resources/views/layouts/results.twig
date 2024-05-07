@@ -1,0 +1,45 @@
+{% extends 'app.twig' %}
+{% block content %}
+<h1>Results</h1>
+
+<p>You matched with {{ matchedCompanies|length }} companies: </p>
+
+<div class="matches">
+    {% for company in matchedCompanies %}
+        <div class="matches__match">
+            <h3>{{ company.name }}</h3>
+            <p>{{ company.description }}</p>
+            <a href="#" id='{{ company.id }}more' class="matches__match__more">more</a>
+
+            <div class="match__match__details" style="display:none">
+                <p><strong>Email:</strong> {{ company.email }}</p>
+                <p><strong>Phone:</strong> {{ company.phone }}</p>
+                <p><strong>Website:</strong> {{ company.website }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    var acc = document.getElementsByClassName("matches__match__more");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+        /* Toggle between adding and removing the "active" class,
+        to highlight the button that controls the panel */
+        this.classList.toggle("active");
+
+        /* Toggle between hiding and showing the active panel */
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+        panel.style.display = "none";
+        } else {
+        panel.style.display = "block";
+        }
+    });
+    }
+</script>
+{% endblock %}
